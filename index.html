@@ -70,9 +70,42 @@
       <div class="img"><img src="./assets/hero-leaf2.png" alt="" /></div>
     </section>
     <!-- card section -->
-    <div class="card_section py-12">
+    <div class="card_section py-12 w-full mx-auto">
       <h2 class="text-center text-3xl font-semibold">Choose Your Trees</h2>
-      <div class="card_div" id="card_div"></div>
+      <div id="card_div" class="px-4">
+        <div class="container w-full mx-auto">
+          <div class="flex flex-col md:flex-row gap-3">
+            <!-- categories (left) -->
+            <aside id="categories_container" class="md:w-3/15 w-full mt-4">
+              <div id="categories" class="bg-white rounded-lg p-4 shadow"></div>
+            </aside>
+
+            <!-- plants (middle) -->
+            <main id="plants_container" class="md:w-9/15 w-full"></main>
+
+            <!-- cart (right) -->
+            <aside id="cart_container" class="md:w-3/15 w-full mt-4">
+              <div
+                id="cart_box"
+                class="bg-white rounded-lg p-4 shadow sticky top-6"
+              >
+                <h3 class="text-lg font-semibold mb-3">Your Cart</h3>
+                <div id="cart_items" class="space-y-2"></div>
+                <div id="cart_total_box" class="border-t pt-3 mt-3">
+                  <div class="flex justify-between items-center">
+                    <span class="font-semibold">Total</span>
+                    <span id="cart_total" class="font-bold text-lg">৳ 0</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      
+
+        <!-- modal placeholder -->
+        <div id="modal_root"></div>
+      </div>
     </div>
     <!-- About section -->
     <div class="about_section w-8/12 mx-auto">

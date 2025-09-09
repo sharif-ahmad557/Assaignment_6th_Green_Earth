@@ -21,14 +21,14 @@ const init = () => {
   addGlobalModalCloseListeners();
 };
 
-// Render main shell inside #card_div
+// Render main shell inside
 const renderShell = () => {
   const cardDiv = document.getElementById("card_div");
   cardDiv.innerHTML = `
-    <div class="container w-14/15 mx-auto">
+    <div class="container w-full mx-auto">
       <div class="flex flex-col md:flex-row gap-3">
         <!-- categories (left) -->
-        <aside id="categories_container" class="md:w-3/15 w-full">
+        <aside id="categories_container" class="md:w-3/15 w-full mt-4">
           <div id="categories" class="bg-white rounded-lg p-4 shadow"></div>
         </aside>
 
@@ -41,7 +41,7 @@ const renderShell = () => {
         </main>
 
         <!-- cart (right) -->
-        <aside id="cart_container" class="md:w-3/15 w-full">
+         <aside id="cart_container" class="md:w-3/15 w-full mt-4">
           <div id="cart_box" class="bg-white rounded-lg p-4 shadow sticky top-6">
             <h3 class="text-lg font-semibold mb-3">Your Cart</h3>
             <div id="cart_items" class="space-y-2"></div>
@@ -56,12 +56,12 @@ const renderShell = () => {
       </div>
     </div>
 
-    <!-- modal placeholder -->
+     <!-- modal placeholder -->
     <div id="modal_root"></div>
-  `;
+   `;
 };
 
-// show spinner (returns function to hide)
+// show spinner
 const showSpinnerIn = (containerSelectorOrEl) => {
   const container =
     typeof containerSelectorOrEl === "string"
@@ -114,7 +114,6 @@ const loadCategories = () => {
 const renderCategories = () => {
   const c = document.getElementById("categories");
   let html = "";
-  // render categories only, All বাদ
   categoriesList.forEach((cat) => {
     const catId =
       cat.id ||
@@ -142,17 +141,15 @@ const renderCategories = () => {
       // remove active from others
       btns.forEach((b) => {
         b.classList.remove("bg-[#15803d]", "text-white");
-        b.classList.add("hover:bg-green-50"); // hover পুনরায় চালু
+        b.classList.add("hover:bg-green-50");
       });
       btn.classList.add("bg-[#15803d]", "text-white");
-      btn.classList.remove("hover:bg-green-50"); // active হলে hover বাদ
+      btn.classList.remove("hover:bg-green-50");
       selectedCategoryId = btn.getAttribute("data-id");
       selectedCategoryName = btn.textContent.trim();
       loadPlantsByCategory(selectedCategoryId);
     });
   });
-
-  // কোন বাটন ডিফল্টভাবে active নয়
 };
 
 // --- Plants Loading ---
@@ -290,9 +287,7 @@ const addToCart = (plant) => {
     id: plant.id + "-" + Math.random().toString(36).slice(2, 7),
     name: plant.name,
     price: Number(plant.price),
-    image: null, // ছবি থাকবে না
     categoryName: plant.categoryName,
-    raw: plant.raw,
   });
   saveCartToStorage();
   renderCart();
@@ -366,7 +361,7 @@ const showPlantModal = (plant) => {
   root.innerHTML = `
     <div id="modal_overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg w-11/12 md:w-8/12 lg:w-6/12 p-4 relative max-h-[90vh] overflow-auto">
-        <button id="modal_close_btn" class="absolute top-3 right-3 text-lg">✖</button>
+        <button id="modal_close_btn" class="absolute top-3 right-3 text-lg p-3 bg-gray-200 hover:bg-gray-500 rounded-md">✖</button>
         <div class="flex flex-col md:flex-row gap-4">
           <div class="md:w-1/2">
             <img src="${plant.image}" alt="${escapeHtml(
@@ -377,14 +372,17 @@ const showPlantModal = (plant) => {
             <h2 class="text-2xl font-semibold mb-2">${escapeHtml(
               plant.name
             )}</h2>
-            <p class="text-sm text-gray-600 mb-3">${escapeHtml(
+            <p class="text-sm text-gray-600 mb-3">Category: ${escapeHtml(
               plant.categoryName
-            )} · ৳ ${formatPrice(plant.price)}</p>
-            <p class="text-sm text-gray-700 mb-4">${escapeHtml(
+            )}</p>
+            <p class="text-sm text-gray-600 mb-3">Price: ৳ ${formatPrice(
+              plant.price
+            )}</p>
+            <p class="text-sm text-gray-700 mb-4"><span class="font-medium">Description: </span> ${escapeHtml(
               plant.description
             )}</p>
             <div>
-              <button id="modal_add_cart" class="w-full py-2 rounded bg-green-600 text-white font-semibold">Add to Cart</button>
+              <button id="modal_add_cart" class="w-full py-2 rounded bg-green-600 hover:bg-green-900 text-white font-semibold">Add to Cart</button>
             </div>
           </div>
         </div>
